@@ -26,16 +26,10 @@ public abstract class MainWindowMenu extends MenuBar implements EventHandler<Act
     private void initComponents() {
         // Sukuriamas meniu      
         Menu menu1 = new Menu(MESSAGES.getString("menu1"));
-        MenuItem menuItem11 = new MenuItem(MESSAGES.getString("menuItem11"));
+        MenuItem menuItem11 = new MenuItem(MESSAGES.getString("menuItem13"));
         menuItem11.setAccelerator(new KeyCodeCombination(KeyCode.O, KeyCombination.CONTROL_DOWN));
         menuItem11.setOnAction(this);
-        MenuItem menuItem12 = new MenuItem(MESSAGES.getString("menuItem12"));
-        menuItem12.setAccelerator(new KeyCodeCombination(KeyCode.S, KeyCombination.CONTROL_DOWN));
-        menuItem12.setOnAction(this);
-        MenuItem menuItem13 = new MenuItem(MESSAGES.getString("menuItem13"));
-        menuItem13.setAccelerator(new KeyCodeCombination(KeyCode.Z, KeyCombination.CONTROL_DOWN));
-        menuItem13.setOnAction(this);
-        menu1.getItems().addAll(menuItem11, menuItem12, new SeparatorMenuItem(), menuItem13);
+        menu1.getItems().addAll(menuItem11);
 
         Menu menu2 = new Menu(MESSAGES.getString("menu2"));
         MenuItem menuItem21 = new MenuItem(MESSAGES.getString("menuItem21"));

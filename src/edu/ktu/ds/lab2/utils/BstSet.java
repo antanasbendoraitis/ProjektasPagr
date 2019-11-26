@@ -380,7 +380,7 @@ public class BstSet<E extends Comparable<E>> implements SortedSet<E>, Cloneable 
      * @return Grąžinamas aibės poaibis iki elemento. //poaibis kas žemiau
      */
     @Override //-----------------------------------------------------------------Grąžinamas aibės poaibis iki elemento--------------------||
-    public Set<E> headSet(E element) {
+    public Set<E> headSet1(E element) {
         Set<E> el = new BstSet<E>();
            if (element == null) {
                return null;
@@ -444,7 +444,7 @@ public class BstSet<E extends Comparable<E>> implements SortedSet<E>, Cloneable 
      */
     @Override//-----------------------------------------------------------------Grąžinamas aibės poaibis nuo elemento element1 iki element2--------------------||
     public Set<E> subSet(E element1, E element2) {
-           Set<E> el = headSet(element1);
+           Set<E> el = headSet1(element1);
            Set<E> el2 = tailSet(element2);
            if(el == null || el2 == null)
                return null;
@@ -471,9 +471,9 @@ public class BstSet<E extends Comparable<E>> implements SortedSet<E>, Cloneable 
         if (fromInclusive)
             set = tailSet(fromElement);
         else
-            set = headSet(fromElement);
+            set = headSet1(fromElement);
         if (toInclusive) //Atvirkščiai negu set elemento įskaitymas vyksta sukeitus headSet ir tailSet vietomis
-            set2 = headSet(toElement);
+            set2 = headSet1(toElement);
         else
             set2 = tailSet(toElement);
         if(set2 != null)
@@ -645,6 +645,45 @@ public class BstSet<E extends Comparable<E>> implements SortedSet<E>, Cloneable 
                     recMax(node.left);
         }
     }
+    
+    public SortedSet<E> headSet(E element)
+    {
+        SortedSet<E> sort = new BstSet<E>();
+        SortedSet<E> el = new BstSet<E>();
+        if (element == null /*|| (root.element == element && root.left == null)*/ || root == null) {
+            return (SortedSet<E>)el;
+        }
+        BstNode<E> node = root;
+        while (node != null) {
+            int cmp = c.compare(element, node.element);
+            if (cmp < 0) {
+                node = node.left;
+            } else if (cmp > 0) {
+                node = node.right;
+            } else {
+                if (node.left != null) {
+                   recTakeFrom2(el, node, 0);
+                   return el;
+                }
+                else
+                    return (SortedSet<E>)el;
+            }
+        }
+        return null;
+    }
+    
+    public void recTakeFrom2(SortedSet<E> el, BstNode<E> node, int k)
+    {
+        if (node.right != null && k == 1) {
+            System.out.println(node.element.toString());
+            el.add(node.right.element);
+                    recTakeFrom2(el, node.right, 1);
+        }
+        if (node.left != null) {
+            el.add(node.left.element);
+                    recTakeFrom2(el, node.left, 1);
+        }
+    }
     /**
      * Grąžinamas tiesioginis iteratorius.
      *
@@ -680,9 +719,9 @@ public class BstSet<E extends Comparable<E>> implements SortedSet<E>, Cloneable 
         if (fromInclusive)
             set = tailSet(fromElement);
         else
-            set = headSet(fromElement);
+            set = headSet1(fromElement);
         if (toInclusive) //Atvirkščiai negu set elemento įskaitymas vyksta sukeitus headSet ir tailSet vietomis
-            set2 = headSet(toElement);
+            set2 = headSet1(toElement);
         else
             set2 = tailSet(toElement);
         for (E e : set2) {
@@ -726,7 +765,6 @@ public class BstSet<E extends Comparable<E>> implements SortedSet<E>, Cloneable 
         @Override
         public E next() {
             if (!stack.empty()) {
-               // System.out.println( "--------------------222");
                 size2++;
                 if (remov == 0) //Šalinimas iš vidurio
                        n = stack.pop();
@@ -758,7 +796,7 @@ public class BstSet<E extends Comparable<E>> implements SortedSet<E>, Cloneable 
                 removeRecursive(n.element, root);
                // next();
             }*/
-            if (size2 == size) { //šalinamas paskutinis elementas
+            if (size2 == size && remov == 1) { //šalinamas paskutinis elementas
                 removeRecursive(n.element, root);  
             }
             //throw new UnsupportedOperationException("Studentams reikia realizuoti remove()");

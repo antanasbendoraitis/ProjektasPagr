@@ -10,7 +10,7 @@ public interface SortedSet<E> extends Set<E> {
      * @param element - Aibės elementas.
      * @return Grąžinamas aibės poaibis iki elemento data.
      */
-    Set<E> headSet(E element);
+    Set<E> headSet1(E element);
 
     /**
      * Grąžinamas aibės poaibis nuo elemento data1 iki data2.

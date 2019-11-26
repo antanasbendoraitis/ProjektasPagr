@@ -3,29 +3,30 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package edu.ktu.ds.lab2.Bendoraitis;
-
-import edu.ktu.ds.lab2.gui.MainWindow;
-import javafx.application.Application;
-import javafx.stage.Stage;
+package Projektas_Doubly_Linked_List;
 
 import java.util.Locale;
 
-/**
- *
- * Darbo atlikimo tvarka - čia yra pradinė klasė.
- * @author Antanas
+import edu.ktu.ds.lab2.gui.MainWindow;
+import java.io.FileNotFoundException;
+import javafx.application.Application;
+import javafx.stage.Stage;
+
+/*
+ * @Author Antanas Bendoraitis
  */
 public class DemoExecution extends Application {
+
     public static void main(String[] args) {
         DemoExecution.launch(args);
     }
+
     @Override
-    public void start(Stage primaryStage) throws Exception
-    {
-        Locale.setDefault(Locale.US);//Suvienodiname skaičių formatus
-        ManualTest.executeTest();
+    public void start(Stage primaryStage) throws FileNotFoundException {
+        Locale.setDefault(Locale.US); // Suvienodiname skaičių formatus 
+       // ManualTest.executeTest();
+        setUserAgentStylesheet(STYLESHEET_MODENA);    //Nauja FX išvaizda
+       // setUserAgentStylesheet(STYLESHEET_CASPIAN); //Sena FX išvaizda
         MainWindow.createAndShowGui(primaryStage);
     }
-    
 }
